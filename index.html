@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>ArcTouch Challenge</title>
+		<style type="text/css">
+			#girlStrip{background-image: url("assets/girlStrip.png");}
+			#ice2{background-image: url("assets/ice2.png");}
+			#girlTop{background-image: url("assets/girlTop.png");}
+			#ice3{background-image: url("assets/ice3.png");}
+			#banner{
+				width: 300px;
+				height: 250px;
+				margin: 0 auto;
+				position: relative;
+				overflow: hidden;
+			}
+			img{position: absolute;}
+			.bottom{bottom: 0;}
+			#ice3{bottom: 25px;}
+			#razorEnding{left: 5px;}
+			#razor{
+				width: 60%;
+				top: -350px;
+			}
+			#banner div{
+				width: 300px;
+				height: 250px;
+				position: absolute;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="banner">
+			<img src="assets/girlBottom.png">
+			<img id="iceTop" src="assets/iceTop.png">
+			<img id="ice1" src="assets/ice1.png">
+			<div id="girlTop"></div>
+			<div id="girlStrip"></div>
+			<div id="ice2"></div>
+			<div id="ice3"></div>
+			<img id="razor" src="assets/razor.png">
+			<img src="assets/logo.png">
+			<img class="bottom" src="assets/cta.png">
+			<img id="razorEnding" class="bottom" src="assets/razorEnding.png">
+		</div>
+	</body>
+	<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.19.1/TweenMax.min.js"></script>
+	<script type="text/javascript">
+		(function($){
+	
+			var ice1 = $('#ice1'),
+				ice3 = $('#ice3'),
+				girlStrip = $('#girlStrip'),
+				girlTop = $('#girlTop'),
+				razorEnding = $('#razorEnding'),
+				razor = $('#razor'),
+				path = [{x:0, y:200}, {x:200, y:230}, {x:400, y:0}],
+				path2 = [{x:330, y:100}, {x:0, y:300}, {x:-330, y:100}],
+				path3 = [{x:0, y:100}, {x:225, y:130}, {x:450, y:70}],
+				path4 = [{x:450, y:170}, {x:200, y:250}, {x:-300, y:170}],
+				tl = new TimelineLite();
+
+			tl
+				.from(girlStrip, 0.8, {width:0, ease: Power0.easeIn, delay:1})
+				.to(razor, 1, {bezier:{curviness: 1, values:path}}, 1)
+				.fromTo(razor, 1, {rotation:-10}, {rotation:-140}, 1)
+				.to(ice2, 1.3, {width:0})
+				.to(razor, 1, {bezier:{curviness: 1, values:path2}}, 2)
+				.fromTo(razor, 1, {rotation:10}, {rotation:140}, 2)		
+				.from(girlTop, 0.5, {width:0})
+				.to(razor, 1, {bezier:{curviness: 1, values:path3}}, 3)
+				.fromTo(razor, 1, {rotation:-60}, {rotation:-100}, 3)		
+				.to(ice3, 1.3, {width:0, ease: Power1.easeOut})
+				.to(razor, 1.5, {bezier:{curviness: 1, values:path4}}, 4)
+				.fromTo(razor, 1.5, {rotation:80}, {rotation:150}, 4)
+				.from(razorEnding, 0.5, { ease: Back.easeOut.config(1.7), x: -104});
+
+		})(jQuery);
+	</script>
+</html>
